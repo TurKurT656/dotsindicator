@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("com.vanniktech.maven.publish").version("0.19.0")
+    `maven-publish`
 }
 
 android {
@@ -27,4 +27,18 @@ dependencies {
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.turkurt656"
+            artifactId = "dotsindicator"
+            version = "master-SNAPSHOT"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }
